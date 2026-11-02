@@ -1,0 +1,69 @@
+{
+    "appconfig": {
+        "headless": false,
+        "isGroupReply": false,
+        "webhook": "",
+        "downloadMedia": true,
+        "replyOnMedia": true,
+        "replyUnreadMsg": false,
+        "CustomInjectionFolder": "",
+        "quoteMessageInReply": false,
+        "server": {
+            "port": 8080,
+            "username": "admin",
+            "password": "admin"
+        }
+    },
+    "bot": [
+        {
+            "contains": ["menu", "oi", "olá", "ola", "bom dia", "boa tarde", "boa noite", "ajuda"],
+            "exact": [],
+            "response": "Olá! 👋 Seja bem-vindo à *Clean Tech Ar Condicionado*.\n\nComo podemos te ajudar hoje?\n\n*1* - Instalação\n*2* - Manutenção\n*3* - Limpeza Higiênica\n*4* - Falar com um especialista\n*5* - Ver nossa logo / fotos\n*6* - Fazer um orçamento"
+        },
+        {
+            "contains": [],
+            "exact": ["1"],
+            "response": "🔧 *Instalação*: Realizamos a instalação profissional de split, cassete e piso-teto, com garantia e os melhores técnicos da região.\n\nDeseja fazer um orçamento? Digite *6* ou *menu* para voltar."
+        },
+        {
+            "contains": [],
+            "exact": ["2"],
+            "response": "🛠️ *Manutenção*: Fazemos manutenção preventiva e corretiva para todos os modelos e marcas, com atendimento rápido e eficiente.\n\nDeseja fazer um orçamento? Digite *6* ou *menu* para voltar."
+        },
+        {
+            "contains": [],
+            "exact": ["3"],
+            "response": "🧼 *Limpeza Higiênica*: Limpeza completa com produtos específicos, garantindo ar puro e o funcionamento perfeito do equipamento.\n\nDeseja fazer um orçamento? Digite *6* ou *menu* para voltar."
+        },
+        {
+            "contains": [],
+            "exact": ["4"],
+            "response": "Certo! Um de nossos especialistas falará com você em instantes. Por favor, aguarde. 🙏"
+        },
+        {
+            "contains": [],
+            "exact": ["5"],
+            "response": "Aqui está a logo da Clean Tech! 👇",
+            "file": [
+                "./media/logo.png"
+            ]
+        },
+        {
+            "contains": [],
+            "exact": ["6"],
+            "response": "Vamos começar o orçamento! Vou fazer algumas perguntas rápidas.\n\n*Pergunta 1*: Você já tem o equipamento de ar condicionado? (Responda *Sim* ou *Não*)"
+        },
+        {
+            "contains": [],
+            "exact": ["obrigado", "obrigada", "valeu", "tchau"],
+            "response": "Por nada! A *Clean Tech* agradece o seu contato. Se precisar de mais alguma coisa, é só chamar. 👋"
+        }
+    ],
+    "blocked": [],
+    "allowed": [],
+    "noMatch": "Desculpe, não entendi. 🤔\n\nDigite *menu* para ver as opções ou *6* para fazer um orçamento.",
+    "smartreply": {
+        "suggestions": [],
+        "clicktosend": false
+    }
+}
