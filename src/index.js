@@ -1,7 +1,6 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require('@whiskeysockets/baileys');
 const fs = require('fs');
 const pino = require('pino');
-const QRCode = require('qrcode');
 
 const config = JSON.parse(fs.readFileSync('./bot.json', 'utf8'));
 const userStates = {};
@@ -28,18 +27,23 @@ async function startBot() {
 
     sock.ev.on('creds.update', saveCreds);
 
-    sock.ev.on('connection.update', async (update) => {
-        const { connection, lastDisconnect, qr } = update;
+    if (!sock.authState.creds.registered) {
+        const phoneNumber = "SEU_NUMERO_AQUI"; // <-- COLOQUE O NÚMERO DO BOT AQUI (com 55 e DDD)
         
-        if (qr) {
-            console.log('QR CODE GERADO!');
+        setTimeout(async () => {
             try {
-                await QRCode.toFile('./qrcode.png', qr, { width: 500 });
-            } catch (err) {
-                console.error('Erro ao gerar QR Code', err);
+                const code = await sock.requestPairingCode(phoneNumber);
+                console.log(`\n=========================================`);
+                console.log(`SEU CÓDIGO DE PAREAMENTO É: ${code}`);
+                console.log(`=========================================\n`);
+            } catch (error) {
+                console.error("Erro ao gerar código:", error);
             }
-        }
+        }, 3000);
+    }
 
+    sock.ev.on('connection.update', async (update) => {
+        const { connection, lastDisconnect } = update;
         if (connection === 'close') {
             const shouldReconnect = (lastDisconnect.error)?.output?.statusCode !== DisconnectReason.loggedOut;
             if (shouldReconnect) {
